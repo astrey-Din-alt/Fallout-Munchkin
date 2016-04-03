@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{DD684DD5-CBB8-FDED-8C80-2C8E7CB71DC9}") = "CardGame_Beta", "Assembly-CSharp-firstpass.csproj", "{D662710E-1959-307E-0184-4EC593CF4F66}"
+EndProject
+Project("{DD684DD5-CBB8-FDED-8C80-2C8E7CB71DC9}") = "CardGame_Beta", "Assembly-CSharp.csproj", "{BC4FEE0D-0A79-A4AD-3B12-15AB7253687B}"
+EndProject
+Project("{DD684DD5-CBB8-FDED-8C80-2C8E7CB71DC9}") = "CardGame_Beta", "Assembly-CSharp-Editor.csproj", "{1EC80312-CF57-B61D-EFC7-29CBDA59F3F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D662710E-1959-307E-0184-4EC593CF4F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D662710E-1959-307E-0184-4EC593CF4F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D662710E-1959-307E-0184-4EC593CF4F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D662710E-1959-307E-0184-4EC593CF4F66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC4FEE0D-0A79-A4AD-3B12-15AB7253687B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4FEE0D-0A79-A4AD-3B12-15AB7253687B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4FEE0D-0A79-A4AD-3B12-15AB7253687B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4FEE0D-0A79-A4AD-3B12-15AB7253687B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC80312-CF57-B61D-EFC7-29CBDA59F3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC80312-CF57-B61D-EFC7-29CBDA59F3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC80312-CF57-B61D-EFC7-29CBDA59F3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC80312-CF57-B61D-EFC7-29CBDA59F3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
