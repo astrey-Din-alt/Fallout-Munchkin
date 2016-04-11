@@ -9,5 +9,5 @@ public class Monster : MonoBehaviour
     public bool Radiation;
     public int RadiationPower;
     public int TreasureCount;
-    public int LevelCouunt;
+    public int LevelCount;
 }

@@ -23,7 +23,10 @@ public class Game : MonoBehaviour {
     }
 
     void OnGUI() {
-
+        if (GUI.Button(new Rect(800, 50, 60, 30), "Reset Lvl!"))
+        {
+            GameObject.FindObjectOfType<ResetLvl>().Reset();
+        }
         GUILayout.Label("Current Stage: " + CurrentStage);
         GUILayout.Label("System message: " + message);
         if (CurrentPlayer != null)
@@ -61,7 +64,7 @@ public class Game : MonoBehaviour {
         {
             if (GUI.Button(new Rect(275, 50, 125, 50), "Fight!"))
             {
-                //TODO: Прописать битву с монстром
+                FightMonster(CurrentCard);
             }
             if (GUI.Button(new Rect(400, 50, 125, 50), "Run!"))
             {
@@ -76,7 +79,7 @@ public class Game : MonoBehaviour {
             if (GUI.Button(new Rect(400, 50, 125, 50), "Take to hand!"))
             {
                 TakeCard(CurrentCard);
-                CurrentStage = "Seeck & Hide";
+                CurrentStage = "Hide & Seek";
             }
         }
         if (CurrentStage == "Radiation")
@@ -86,7 +89,7 @@ public class Game : MonoBehaviour {
                 ThrowDice(CurrentCard);
             }
         }
-        if (CurrentStage == "Seeck & Hide")
+        if (CurrentStage == "Hide & Seek")
         {
             if (GUI.Button(new Rect(400, 50, 125, 50), "Open door in dark!"))
             {
@@ -211,7 +214,10 @@ public class Game : MonoBehaviour {
         door.transform.Rotate(0, 0, 270);
         door.transform.localScale = new Vector3(3, 3, 3);
         door.GetComponentInParent<Card>().player = CurrentPlayer;
+        Card currentCard = door.GetComponentInParent<Card>();
+        CurrentCard = currentCard;
         CurrentStage = "Open Door";
+        StartCoroutine(WaitForSeconds());
         if (door.Type == "Monster")
         {
             if (door.GetComponentInChildren<Monster>().Radiation)
@@ -224,7 +230,6 @@ public class Game : MonoBehaviour {
         }
         else if (door.Type == "Trap")
         {
-            StartCoroutine(WaitForSeconds());
             CurrentStage = "Trap";            
             door.GetComponent<Trap>().Activate(CurrentPlayer);
             CurrentStage = "Finish";
@@ -235,9 +240,7 @@ public class Game : MonoBehaviour {
         }
         else
         {
-            CurrentStage = "Take";
-            Card currentCard = door.GetComponentInParent<Card>();
-            CurrentCard = currentCard;
+            CurrentStage = "Take";           
         }
     }     
 
@@ -262,13 +265,15 @@ public class Game : MonoBehaviour {
         CurrentPlayer.Hand.Add(card);
         var hand = CurrentPlayer.transform.FindChild("Hand");
         card.transform.parent = hand.transform;
-        //TODO Получение позиции последней карты
-        //var position = CurrentPlayer.Hand[CurrentPlayer.Hand.Count - 1].transform.position;
         Vector3 pos = new Vector3(5 + (CurrentPlayer.Hand.Count * 5), -11, 0);
-        //var position = CurrentPlayer.Hand.Last().transform.position;
         var rotation = card.transform.rotation;
         card.transform.position = pos;
         card.transform.localScale = new Vector3(1, 1, 1);
+        if (CurrentStage == "Hide & Seek")
+        {
+            card.transform.Rotate(0, 0, 270);
+            CurrentStage = "Finish";
+        }
     }
 
     void ThrowDice(Card card) {
@@ -286,8 +291,9 @@ public class Game : MonoBehaviour {
         }
         else
         {
-            CurrentStage = "Finish";
+            //TODO:Если тип двери "Радиация"
             card.GetComponent<Radiation>().Acivate(CurrentPlayer);
+            CurrentStage = "Finish";
         }
     }
 
@@ -319,4 +325,19 @@ public class Game : MonoBehaviour {
         //TODO: Сделать сброс для перков
     }
 
+    public void FightMonster(Card card)
+    {
+        if (CurrentPlayer.Power < card.GetComponent<Monster>().Level)
+        {
+            var trs = GameObject.Find("Treasures").GetComponentsInChildren<Card>().ToList();            
+            for (var i = 0; i < card.GetComponent<Monster>().TreasureCount; i++)
+            {
+                var ind = Random.Range(1, trs.Count);
+                CurrentPlayer.Hand.Add(trs.ElementAt(ind));
+                var hand = CurrentPlayer.transform.FindChild("Hand");
+                card.transform.parent = hand.transform;
+            }
+            CurrentPlayer.Lvl += card.GetComponent<Monster>().LevelCount;
+        }
+    }
 }
