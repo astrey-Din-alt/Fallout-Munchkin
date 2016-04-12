@@ -23,10 +23,11 @@ public class Game : MonoBehaviour {
     }
 
     void OnGUI() {
-        if (GUI.Button(new Rect(800, 50, 60, 30), "Reset Lvl!"))
+        if (GUI.Button(new Rect(0, 0, 90, 30), "Reset Lvl!"))
         {
             GameObject.FindObjectOfType<ResetLvl>().Reset();
         }
+        GUILayout.Label("");
         GUILayout.Label("Current Stage: " + CurrentStage);
         GUILayout.Label("System message: " + message);
         if (CurrentPlayer != null)

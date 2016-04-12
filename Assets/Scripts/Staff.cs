@@ -7,9 +7,28 @@ public class Staff : MonoBehaviour {
     public int Price;
     public int Power;
     public bool OneTime;
-    public bool ForEveryone;
+    public bool ForEverySide;
+    public bool BigStaff;
+    public bool Ability;
     public bool isCondition;
+    public ConditionClass ForClass;
+    public ConditionClass NotForClass;
+    public ConditionRadiation NotForRadiation;
 
+    public enum ConditionClass {
+        No,
+        Raider,
+        Enclave_scientist,
+        Lone_wanderer,
+        Brotherhood_paladin
+    }
+
+    public enum ConditionRadiation {
+        No,
+        Mutant,
+        Ghoul
+    }
+    
     public void PutOn(CardPlayer player)
     {
         if (!isCondition)
@@ -55,7 +74,10 @@ public class Staff : MonoBehaviour {
                     position = new Vector3(17, 29, 0);
                 else
                     position = new Vector3(14, 29, 0);
-                break;         
+                break;
+            case "Kastet":
+                position = new Vector3(14, 29, 0);
+                break;
             case "Armor":
                 position = new Vector3(35, 29, 0);
                 break;

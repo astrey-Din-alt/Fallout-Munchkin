@@ -26,6 +26,8 @@ public class CardPlayer : MonoBehaviour {
 
     public bool isKilled;
 
+    //TODO: Учитывать способности игрока, такие как класс, перк или шмотка (например Броня лечения)
+
     void Start()
     {
         Power += Lvl;
