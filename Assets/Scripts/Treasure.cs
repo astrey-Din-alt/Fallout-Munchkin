@@ -4,8 +4,15 @@ using System.Collections;
 public class Treasure : MonoBehaviour {
     public string Name;
     public string Discription;
-    public string Type;
+    public TreasureType Type;
     public bool AddLvl;
+
+    public enum TreasureType
+    {
+        Staff,
+        Lvl,
+        Other
+    }
 
     public void Use(CardPlayer player)
     {
@@ -13,13 +20,13 @@ public class Treasure : MonoBehaviour {
         var card = this.GetComponentInParent<Card>();
         switch (this.Type)
         {
-            case "Lvl":
+            case TreasureType.Lvl:
                 player.Lvl++;
                 player.Power++;
                 player.Hand.Remove(card);
                 GameObject.FindObjectOfType<Game>().tReset(card);
                 break;
-            case "Other":
+            case TreasureType.Other:
                 break;
         }            
     }    

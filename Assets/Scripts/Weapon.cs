@@ -10,7 +10,8 @@ public class Weapon : MonoBehaviour {
         Energy,
         Fire,
         Steel,
-        Light
+        Light,
+        Heavy
     }
 
 }

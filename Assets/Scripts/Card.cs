@@ -3,13 +3,19 @@ using System.Collections;
 
 public class Card : MonoBehaviour {
     public int Id;
-    public string Type;
+    public CardType Type;
     public bool Enabled = false;
     public bool Selected = false;
-    public Game game;
     public CardPlayer player;
-    public Card CurrentCard;
-    public Handler Handler;
+    private Game game;    
+    private Card CurrentCard;
+    private Handler Handler;
+
+    public enum CardType{
+        Door,
+        Treasure,
+        Perk
+    }
 
     void OnMouseDown()
     {
@@ -55,9 +61,9 @@ public class Card : MonoBehaviour {
                 }
             }
             //Treasure
-            if (this.Type == "Treasure")
+            if (this.Type == CardType.Treasure)
             {
-                if (this.GetComponent<Treasure>().Type == "Staff")
+                if (this.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff)
                 {
                     if (
                         this.GetComponent<Staff>().StaffType == "Armor" ||
@@ -89,46 +95,46 @@ public class Card : MonoBehaviour {
     {
         player = game.CurrentPlayer;
         //Тип двери
-        if (card.Type == "Door")
+        if (card.Type == CardType.Door)
         {
             var door = card.GetComponent<Door>();
             //Подтип Класс
-            if (card.GetComponent<Door>().Type == "Class")
+            if (card.GetComponent<Door>().Type == Door.DoorType.Class)
             {
                 door.GetComponent<Class>().Activate(player);
             }
             //Подтип Напарник
-            if (card.GetComponent<Door>().Type == "Partner")
+            if (card.GetComponent<Door>().Type == Door.DoorType.Partner)
             {
                 door.GetComponent<Partner>().Activate(player);                
             }
             //Подтип Радиация
-            if (card.GetComponent<Door>().Type == "Radiation")
+            if (card.GetComponent<Door>().Type == Door.DoorType.Radiation)
             {
                //TODO: Использование радиации с руки на другого игрока
             }
             //Подтип Ловушка
-            if (card.GetComponent<Door>().Type == "Trap")
+            if (card.GetComponent<Door>().Type == Door.DoorType.Trap)
             {
                //TODO: Использование ловушки с руки на другого игрока
             }
         }
         //Тип сокровища
-        if (card.Type == "Treasure")
+        if (card.Type == CardType.Treasure)
         {
             //подтип Лвл
-            if (card.GetComponent<Treasure>().Type == "Lvl")
+            if (card.GetComponent<Treasure>().Type == Treasure.TreasureType.Lvl)
             {
                 card.GetComponent<Treasure>().Use(player);
             }
             //подтип Взрывчатка
-            if (card.GetComponent<Treasure>().Type == "Explosion")
+            if (card.GetComponent<Staff>().StaffType == "Explosion")
             {
                 //TODO: Вызвать метод из словаря
                 card.GetComponent<Treasure>().Use(player);
             }
             //подтип Бафф
-            if (card.GetComponent<Treasure>().Type == "Buff")
+            if (card.GetComponent<Staff>().StaffType == "Buff")
             {
                 //TODO: Вызвать метод из словаря
                 card.GetComponent<Treasure>().Use(player);
@@ -138,7 +144,7 @@ public class Card : MonoBehaviour {
     //Метод надеть карту
     void PutOn(Card card)
     {
-        if (card.GetComponent<Treasure>().Type == "Staff")
+        if (card.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff)
         {
             card.GetComponent<Treasure>().GetComponent<Staff>().PutOn(player);
         }
@@ -147,9 +153,9 @@ public class Card : MonoBehaviour {
     void ToBag(Card card)
     {
         player = game.CurrentPlayer;
-        if (card.Type == "Treasure")
+        if (card.Type == CardType.Treasure)
         {
-            if (card.GetComponent<Treasure>().Type == "Staff")
+            if (card.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff)
             {
                 var trs = card.GetComponent<Treasure>();
                 var staff = trs.GetComponent<Staff>();

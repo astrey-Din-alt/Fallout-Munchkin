@@ -5,5 +5,14 @@ public class Door : MonoBehaviour
 {
     public string Name;
     public string Discription;
-    public string Type;
+    public DoorType Type;
+
+    public enum DoorType {
+        Monster,
+        Class,
+        Partner,
+        Radiation,
+        Trap,
+        Other
+    }
 }

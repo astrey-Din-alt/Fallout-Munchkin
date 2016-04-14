@@ -219,7 +219,7 @@ public class Game : MonoBehaviour {
         CurrentCard = currentCard;
         CurrentStage = "Open Door";
         StartCoroutine(WaitForSeconds());
-        if (door.Type == "Monster")
+        if (door.Type == Door.DoorType.Monster)
         {
             if (door.GetComponentInChildren<Monster>().Radiation)
             {
@@ -229,13 +229,13 @@ public class Game : MonoBehaviour {
                 CurrentStage = "Fight";
             }
         }
-        else if (door.Type == "Trap")
+        else if (door.Type == Door.DoorType.Trap)
         {
             CurrentStage = "Trap";            
             door.GetComponent<Trap>().Activate(CurrentPlayer);
             CurrentStage = "Finish";
         }
-        else if (door.Type == "Radiation")
+        else if (door.Type == Door.DoorType.Radiation)
         {
             CurrentStage = "Radiation";
         }
@@ -267,7 +267,6 @@ public class Game : MonoBehaviour {
         var hand = CurrentPlayer.transform.FindChild("Hand");
         card.transform.parent = hand.transform;
         Vector3 pos = new Vector3(5 + (CurrentPlayer.Hand.Count * 5), -11, 0);
-        var rotation = card.transform.rotation;
         card.transform.position = pos;
         card.transform.localScale = new Vector3(1, 1, 1);
         if (CurrentStage == "Hide & Seek")

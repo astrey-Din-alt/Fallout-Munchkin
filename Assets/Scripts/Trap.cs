@@ -19,15 +19,15 @@ public class Trap : MonoBehaviour {
             case "Overloading":
                     var hand = 
                         from c in player.Hand
-                        where c.GetComponent<Treasure>().Type == "Staff"
+                        where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
                         && c.GetComponent<Treasure>().GetComponent<Staff>().StaffType != "Junk"
                         select c;
                     var inventary = from c in player.Inventary
-                               where c.GetComponent<Treasure>().Type == "Staff"
+                               where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
                                && c.GetComponent<Treasure>().GetComponent<Staff>().StaffType != "Junk"
                                select c;
                     var bag = from c in player.Bag
-                                where c.GetComponent<Treasure>().Type == "Staff"
+                                where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
                                 && c.GetComponent<Treasure>().GetComponent<Staff>().StaffType != "Junk"
                                 select c;
                 var staff = hand.Concat(inventary).Concat(bag);
@@ -72,14 +72,14 @@ public class Trap : MonoBehaviour {
             case "Torn_Backpack":
                 var hnd =
                     from c in player.Hand
-                    where c.GetComponent<Treasure>().Type == "Staff"
+                    where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
                     select c;
                 var inv = from c in player.Inventary
-                                where c.GetComponent<Treasure>().Type == "Staff"
-                                select c;
+                                where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
+                          select c;
                 var bg = from c in player.Bag
-                            where c.GetComponent<Treasure>().Type == "Staff"
-                            select c;
+                            where c.GetComponent<Treasure>().Type == Treasure.TreasureType.Staff
+                         select c;
                 var stf = hnd.Concat(inv).Concat(bg);
                 for (var i = 0; i < 2; i++)
                 {
@@ -172,7 +172,7 @@ public class Trap : MonoBehaviour {
                 //TODO: Изменить при наличии других игроков
                 var crd = player.Hand.ElementAt(Random.Range(0, player.Hand.Count - 1));
                 player.Hand.Remove(crd);
-                if (crd.Type == "Door")
+                if (crd.Type == Card.CardType.Door)
                     game.dReset(crd);
                 else
                     game.tReset(crd);
@@ -200,7 +200,7 @@ public class Trap : MonoBehaviour {
     void ToReset(Card card)
     {
         var game = GameObject.FindObjectOfType<Game>();
-        if (card.Type == "Door")
+        if (card.Type == Card.CardType.Door)
             game.dReset(card);
         else
             game.tReset(card);

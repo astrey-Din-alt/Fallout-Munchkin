@@ -7,13 +7,19 @@ public class Staff : MonoBehaviour {
     public int Price;
     public int Power;
     public bool OneTime;
-    public bool ForEverySide;
+    public ActionSide Side;
     public bool BigStaff;
     public bool Ability;
     public bool isCondition;
     public ConditionClass ForClass;
     public ConditionClass NotForClass;
     public ConditionRadiation NotForRadiation;
+
+    public enum ActionSide {
+        No,
+        Yourself,
+        For_everyone
+    }
 
     public enum ConditionClass {
         No,
@@ -52,8 +58,7 @@ public class Staff : MonoBehaviour {
     public void ToBag(CardPlayer player) {
         var card = this.GetComponentInParent<Card>();
         player.Bag.Add(card);
-        player.Hand.Remove(card);        
-        int X = 13 + player.Bag.Count * 5;
+        player.Hand.Remove(card);     
         int Y = 35 - player.Bag.Count * 5;
         var bag = player.transform.FindChild("Bag");
         card.transform.parent = bag.transform;

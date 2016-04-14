@@ -49,7 +49,7 @@ public class CardPlayer : MonoBehaviour {
         foreach (var h in this.Hand)
         {
             this.Hand.Remove(h);
-            if (h.Type == "Door")
+            if (h.Type == Card.CardType.Door)
                 game.dReset(h);
             else
                 game.tReset(h);
